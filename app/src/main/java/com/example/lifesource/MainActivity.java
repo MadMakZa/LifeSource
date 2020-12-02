@@ -10,6 +10,7 @@ import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -77,11 +78,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    public void onBackPressed() {
+
         //диалоговое окно при выходе из программы
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog);
+        dialog.setTitle("Dialog box");
+        dialog.show();
+        //продолжить работу
+        Button buttonNo = (Button) dialog.findViewById(R.id.button_no);
+        buttonNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        //закрыть приложение
+        Button buttonYes = (Button) dialog.findViewById(R.id.button_yes);
+        buttonYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                MainActivity.super.onBackPressed();
+            }
+        });
 
-        super.onStop();
+
+
     }
 }
