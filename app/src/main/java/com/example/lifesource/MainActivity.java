@@ -3,6 +3,7 @@ package com.example.lifesource;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -73,5 +74,14 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
+    }
+
+    @Override
+    protected void onStop() {
+        //диалоговое окно при выходе из программы
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog);
+
+        super.onStop();
     }
 }
